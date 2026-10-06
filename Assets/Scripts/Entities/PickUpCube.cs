@@ -18,6 +18,7 @@ namespace Midterm
             transform.rotation = attachPoint.rotation;
             transform.SetParent(attachPoint);
 
+
             _cubeRB.isKinematic = true;
             _cubeRB.useGravity = false;
         }
@@ -28,6 +29,8 @@ namespace Midterm
             _cubeRB.isKinematic = false;
             _cubeRB.useGravity = true;
             transform.SetParent(null);
+
+
 
         }
     }

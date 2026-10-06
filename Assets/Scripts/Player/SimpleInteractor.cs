@@ -26,9 +26,12 @@ namespace Midterm
                 {
                     _selectable.OnHoverEnter();
 
-                    if (_input.activatePressed)
+                    if (PlayerInput.Instance.activatePressed)
                     {
+                        Debug.Log("Interacting with object");
                         _selectable.OnSelect();
+
+                        _selectable = null;
                     }
                 }
             }

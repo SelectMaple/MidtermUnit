@@ -6,6 +6,7 @@ namespace Midterm
     public class ShootInteractor : Interactor
     {
         [SerializeField] Input _inputType;
+        IWeaponBehaviour _currentShootStrategy;
 
         [Header("Shoot")]
         [SerializeField] Rigidbody _bulletPrefab;
@@ -13,35 +14,65 @@ namespace Midterm
         [SerializeField] Transform _shootPoint;
         [SerializeField] PlayerMovementBehaviour _playerMovementBehaviour;
 
-        // - Strategy pattern
-        private IWeaponBehaviour currentWeapon;
+        [SerializeField] MeshRenderer _gunRenderer;
 
         public float damage = 10f;
 
         // private variable
         float _finalShootVelocity;
 
+        void Start()
+        {
+            SwitchWeapon(new BulletWeaponBehaviour(this));
+        }
+
         
         public override void Interact()
         {
-            if (_inputType == Input.Primary && _input.primaryShootPressed|| _inputType == Input.Secondary && _input.secondaryShootPressed)
+            if (_inputType == Input.Primary && PlayerInput.Instance.primaryShootPressed|| _inputType == Input.Secondary && PlayerInput.Instance.secondaryShootPressed)
             {
                 Shoot();
             }
+
+            if (PlayerInput.Instance.alpha1Pressed)
+            {
+                SwitchWeapon(new BulletWeaponBehaviour(this));
+            }
+
+            if (PlayerInput.Instance.alpha2Pressed)
+            {
+                SwitchWeapon(new RocketWeaponBehaviour(this));
+            }
+
+            
         }
 
         void Shoot()
         {
-            _finalShootVelocity = _playerMovementBehaviour.GetForwardSpeed() + _shootVelocity;
+            _finalShootVelocity = _playerMovementBehaviour.GetForwardSpeed() + _shootVelocity; // adds velocity of the player
+            Debug.Log("I'm shooting");
+            _currentShootStrategy.FireWeapon();
 
-            Rigidbody bullet = Instantiate(_bulletPrefab, _shootPoint.position, _shootPoint.rotation);
-            bullet.linearVelocity = _shootPoint.forward * _finalShootVelocity;
-            Destroy(bullet.gameObject, 7f); // remove once object pooling is added
+        }
+
+        public Transform GetShootPoint()
+        {
+            return _shootPoint;
+        }
+
+        public float GetShootVelocity()
+        {
+            return _shootVelocity;
+        }
+        
+        public MeshRenderer GetWeaponRenderer()
+        {
+            return _gunRenderer;
         }
 
         public void SwitchWeapon(IWeaponBehaviour newWeapon)
         {
-            currentWeapon = newWeapon;
+            _currentShootStrategy = newWeapon;
             Debug.Log("Switched to weapon behaviour to: " + newWeapon.GetType().Name);
         }
 

@@ -7,17 +7,16 @@ namespace Midterm
     {
         [SerializeField] string openTag = "Player";
         [SerializeField] Animator animator;
+
+        [SerializeField] Door door;
         float delayTime = 3f;
-
-
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag(openTag))
             {
-                animator.SetBool("DoorOpen", true);
+                animator.SetBool("OpenClose", true);
+                door.DoorOpenClose();
             }
             
         }
@@ -34,7 +33,7 @@ namespace Midterm
         {
 
             yield return new WaitForSeconds(delayTime);
-            animator.SetBool("DoorOpen", false);
+            animator.SetBool("OpenClose", false);
         }
     }
 }

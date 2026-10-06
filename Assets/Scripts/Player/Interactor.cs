@@ -4,7 +4,6 @@ namespace Midterm
 {
     public abstract class Interactor : MonoBehaviour
     {
-        [SerializeField] protected PlayerInput _input;
 
         void Update()
         {

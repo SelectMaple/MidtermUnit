@@ -18,7 +18,7 @@ namespace Midterm
             Ray ray = _cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
             if (Physics.Raycast(ray, out _rayCastHit, _pickUpDistance, _pickUpLayer))
             {
-                if(_input.activatePressed && !isPicked)
+                if(PlayerInput.Instance.activatePressed && !isPicked)
                 {
                     _pickable = _rayCastHit.transform.GetComponent<IPickable>();
                     if (_pickable == null)
@@ -30,7 +30,7 @@ namespace Midterm
                 }
             }
 
-            if (_input.activatePressed && isPicked && _pickable != null)
+            if (PlayerInput.Instance.activatePressed && isPicked && _pickable != null)
             {
                 _pickable.OnDropped();
                 isPicked = false;

@@ -18,26 +18,32 @@ namespace Midterm
         public GameObject projectilePrefab = null;
         public GameObject projectileSpawnPoint = null;
 
+        public Health health = null;
 
         // - Enemy states
         EnemyState currentState = null;
 
+        void Awake()
+        {
+            health.OnDeath += OnDeathResponse;
+        }
         void Start()
         {
             ChangeState(new EnemyIdleState(this));
-          
+
         }
 
         void Update()
         {
-            if(currentState != null)
+            if (currentState != null)
                 currentState.OnStateUpdate();
+            
         }
 
         public void ChangeState(EnemyState newState)
         {
             // - Call the current state's OnStateExit method before changing state
-            if(currentState != null)
+            if (currentState != null)
                 currentState.OnStateExit();
 
             // - Set new state
@@ -49,6 +55,11 @@ namespace Midterm
 
         }
 
+        public void OnDeathResponse()
+        {
+            Destroy(this.gameObject);
+        }
+
         public IEnumerator AttackDelay()
         {
             canAttack = false;
@@ -57,6 +68,7 @@ namespace Midterm
 
             canAttack = true;
         }
+    }
 
 }
-}
+

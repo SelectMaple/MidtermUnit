@@ -95,6 +95,36 @@
                     "interactions": "",
                     "initialStateCheck": false,
                     "priority": 0
+                },
+                {
+                    "name": "RaycastPointCommand",
+                    "type": "Button",
+                    "id": "59866b6b-b89c-405b-85d6-31a2a6fcef0b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "RecallCommand",
+                    "type": "Button",
+                    "id": "0293a0b3-6c22-4811-8063-cbf3fdd11aa5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "Escape/Pause",
+                    "type": "Button",
+                    "id": "9f6c67bb-457b-4ef9-a9dc-45e0cf71d1bf",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
                 }
             ],
             "bindings": [
@@ -458,6 +488,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "SwitchRaycast",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8f855668-2e46-493c-a2af-471ef64e6906",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RaycastPointCommand",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6d8be83f-d8d9-4852-a5f1-6404ac5d4a02",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RecallCommand",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "41fabd1a-d332-4566-b867-0091594506db",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Escape/Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

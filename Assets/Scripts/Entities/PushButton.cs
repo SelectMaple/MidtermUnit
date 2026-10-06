@@ -7,17 +7,41 @@ namespace Midterm
     {
         [SerializeField] Material _default;
         [SerializeField] Material _hoverColor;
+        [SerializeField] Material _uninteractableColor;
         [SerializeField] MeshRenderer _renderer;
+
+        Door door;
 
         public UnityEvent _onPush;
 
         public void OnHoverEnter()
         {
-            _renderer.material = _hoverColor;
+            if (GameManager.instance.hasKeyCard != false)
+            {
+                _renderer.material = _hoverColor;
+            }
+            else
+            {
+                _renderer.material = _uninteractableColor;
+            }
+                
         }
         public void OnSelect()
         {
-            _onPush?.Invoke();
+            if (GameManager.instance.hasKeyCard)
+            {
+                GameManager.instance.hasKeyCard = false;
+
+                Debug.Log("Keycard was used");
+
+                _onPush?.Invoke();
+            }
+            else
+            {
+                Debug.Log("You need a keycard!");
+            }
+
+            
         }
         public void OnHoverExit()
         {

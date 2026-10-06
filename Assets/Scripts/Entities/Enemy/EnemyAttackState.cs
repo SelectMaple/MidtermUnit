@@ -26,21 +26,43 @@ namespace Midterm
         {
             Debug.Log(" Attack updating....");
 
+
+            
             //read distance between player
             float distance = Vector3.Distance(_controller.transform.position, _controller.target.transform.position);
-            _controller.gameObject.transform.LookAt(_controller.target.transform.position);
-
+            
             // go back to follow state if player is out of attack range
             if (distance > _controller.attackRange)
             {
                 _controller.ChangeState(new EnemyFollowState(_controller));
+
             }
                 
             // - shoot a projectile at the player
             if (_controller.canAttack)
             {
-                GameObject bullet = GameObject.Instantiate(_controller.projectilePrefab, _controller.projectileSpawnPoint.transform.position, _controller.transform.rotation);
-                    
+                // - get a pooled bulleted from the object pool
+                PooledObject pooledBullet = ObjectPool.Instance.GetPooledObject(ObjectPool.PoolType.Bullet);
+
+                if (pooledBullet != null)
+                {
+                    pooledBullet.gameObject.SetActive(true);
+
+                    // - get pooled objects projectile script and initialize it
+                    ProjectileScript projectileScript = pooledBullet.GetComponent<ProjectileScript>();
+                    projectileScript.Initialize(_controller.gameObject.tag);
+
+                    // get the rigidbody and set the position and rotation of the bullet
+                    Rigidbody projectile = pooledBullet.GetComponent<Rigidbody>();
+                    projectile.transform.position = _controller.projectileSpawnPoint.transform.position;
+                    projectile.transform.rotation = _controller.transform.rotation;
+
+                    projectile.linearVelocity = _controller.transform.forward * 10f;
+
+                    pooledBullet.DestroyWithTime(2f);
+
+                }
+
                 _controller.StartCoroutine(_controller.AttackDelay());
             }
 

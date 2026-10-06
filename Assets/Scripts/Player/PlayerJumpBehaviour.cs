@@ -15,7 +15,7 @@ namespace Midterm
 
         public override void Interact()
         {
-            if (_input.jumpPressed && _playerMovementBeahviour.isGrounded)
+            if (PlayerInput.Instance.jumpPressed && _playerMovementBeahviour.isGrounded)
             {
                 _playerMovementBeahviour.SetYVelocity(_jumpVelocity);
             }
