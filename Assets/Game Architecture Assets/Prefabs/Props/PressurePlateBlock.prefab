@@ -45,8 +45,6 @@ GameObject:
   - component: {fileID: 5812192697181388724}
   - component: {fileID: 5812192697181388725}
   - component: {fileID: 3802768265788534567}
-  - component: {fileID: 7207581755794259918}
-  - component: {fileID: 1066860297001504795}
   m_Layer: 0
   m_Name: PressurePad
   m_TagString: LevelTransition
@@ -149,32 +147,6 @@ BoxCollider:
   m_Size: {x: 0.02, y: 0.019999996, z: 0.0012717745}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3802768265788534567
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1970658682652724552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd3c5836f426ced4f86c58f169626700, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Midterm.BlockDetectionNicholas
-  door: {fileID: 0}
---- !u!114 &7207581755794259918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1970658682652724552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd3c5836f426ced4f86c58f169626700, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Midterm.BlockDetectionNicholas
-  door: {fileID: 0}
---- !u!114 &1066860297001504795
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

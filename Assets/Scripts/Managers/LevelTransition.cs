@@ -11,15 +11,14 @@ namespace Midterm
         public PlayableDirector director;
         public LevelManager levelManager;
         public UIManager uiManager;
-        
 
         void OnTriggerEnter(Collider other)
         {
+
             if (other.CompareTag("Player"))
             {
-                GameManager.instance.currentLevel = levelManager;
 
-                GameManager.instance.ChangeState(levelState);
+                GameManager.instance.currentLevel = levelManager;
 
                 if (uiManager != null && levelState == GameManager.GameState.LevelStart)
                 {
@@ -30,19 +29,21 @@ namespace Midterm
                 {
                     uiManager.EndLevel();
                 }
-                
+
+                if (uiManager != null && levelState == GameManager.GameState.GameEnd)
+                {
+                    uiManager.ShowGameEnd();
+                    GameManager.instance.OnGameEnd();
+                }
+
+                Debug.Log("Level is transitioning");
+                Debug.Log("Loading Level: " + currentLevelName);
+
                 if (director != null)
                 {
                     director.Play();
                 }
-                else
-                {
-                    GameManager.instance.ChangeState(GameManager.GameState.GamePlaying);
-                }
-                
-                Debug.Log("Level is transitioning");
-                Debug.Log("Loading Level: " + currentLevelName);
-
+        
                 // - any other behaviour for level transition
 
                 gameObject.SetActive(false);

@@ -29,7 +29,7 @@ namespace Midterm
                 if(Physics.Raycast(ray, out var hitInfo))
                 {
                     // - if the raycast hits the ground
-                    if (hitInfo.transform.CompareTag("Ground"))
+                    if (hitInfo.transform.CompareTag("Ground") || hitInfo.transform.CompareTag("LevelTransition"))
                     {
                         // - create a pointer object
                         GameObject pointer = Instantiate(pointerPrefab);
@@ -38,15 +38,14 @@ namespace Midterm
                         // - add a new movement command to the queue of commands for the agent to execute
                         commands.Enqueue(new MoveCommand(agent, hitInfo.point));
                     }
+                    
+
                 }
             }
 
             if (PlayerInput.Instance.recallPressed)
             {
                 commands.Enqueue(new RecallCommand(agent, player));
-
-                
-
             }
 
             

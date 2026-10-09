@@ -26,8 +26,6 @@ namespace Midterm
         {
             Debug.Log(" Attack updating....");
 
-
-            
             //read distance between player
             float distance = Vector3.Distance(_controller.transform.position, _controller.target.transform.position);
             
@@ -37,7 +35,7 @@ namespace Midterm
                 _controller.ChangeState(new EnemyFollowState(_controller));
 
             }
-                
+
             // - shoot a projectile at the player
             if (_controller.canAttack)
             {
@@ -55,9 +53,11 @@ namespace Midterm
                     // get the rigidbody and set the position and rotation of the bullet
                     Rigidbody projectile = pooledBullet.GetComponent<Rigidbody>();
                     projectile.transform.position = _controller.projectileSpawnPoint.transform.position;
-                    projectile.transform.rotation = _controller.transform.rotation;
 
-                    projectile.linearVelocity = _controller.transform.forward * 10f;
+                    Vector3 shootPoint = (_controller.target.transform.position - _controller.projectileSpawnPoint.transform.position).normalized;
+
+                    projectile.transform.rotation = Quaternion.LookRotation(shootPoint);
+                    projectile.linearVelocity = shootPoint * 10f;
 
                     pooledBullet.DestroyWithTime(2f);
 

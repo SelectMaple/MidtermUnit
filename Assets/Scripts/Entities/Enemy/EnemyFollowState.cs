@@ -27,7 +27,7 @@ namespace Midterm
             // - Move towards the player
             _controller.gameObject.transform.position = Vector3.MoveTowards(_controller.gameObject.transform.position, _controller.target.transform.position, _controller.moveSpeed * Time.deltaTime);
             _controller.gameObject.transform.LookAt(_controller.target.transform.position);
-                
+            
 
             // - run raycast to see if we see player
             float distance = Vector3.Distance(_controller.transform.position, _controller.target.transform.position);

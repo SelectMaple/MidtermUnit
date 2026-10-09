@@ -3,12 +3,13 @@ using System.Collections.Generic;
 
 namespace Midterm
 {
+
     public class PlayerExample : MonoBehaviour
     {
         public Waypoint currentWaypoint;
         public Waypoint targetDestination;
 
-        public Queue<Waypoint> waypoints = new Queue<Waypoint>();
+        private Queue<Waypoint> waypoints = new Queue<Waypoint>();
 
         public float moveSpeed = 3f;
         public bool complete = false;

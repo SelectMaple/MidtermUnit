@@ -2,6 +2,7 @@ using System.Collections;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 namespace Midterm
 {
@@ -88,6 +89,9 @@ namespace Midterm
 
         void Update()
         {
+            if (currentGameState == GameState.GameOver || currentGameState == GameState.GameEnd)
+                return;
+
             if (PlayerInput.Instance.escPressed)
             {
                 if (currentGameState  == GameState.Paused)
@@ -100,6 +104,8 @@ namespace Midterm
                     ChangeState(GameState.Paused);
                 }
             }
+
+            
         }
         
         // - Signals/Events for Cinematic Start/End
@@ -133,16 +139,25 @@ namespace Midterm
             //- once it is all done, begin playing
             ChangeState(GameState.GamePlaying);
         }
-        void OnGameOver()
+        public void OnGameOver()
         {
             Debug.Log("Game Over State");
             Time.timeScale = 0f;
+            currentGameState = GameState.GameOver;
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             // - handles logic when players loses/ dies/ runs at a time
         }
-        void OnGameEnd()
+        public void OnGameEnd()
         {
             Debug.Log("Game End State");
             Time.timeScale = 0f;
+            currentGameState = GameState.GameEnd;
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
             // - when we finish a level / hit ending cutscene
         }
         void OnLevelStart()
@@ -171,8 +186,17 @@ namespace Midterm
         {
             Debug.Log("Game is playing");
             Time.timeScale = 1f;
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
+        public void RestartGame()
+        {
+            Debug.Log("Restarting...");
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
 
         // -- Scenes/ Levels
         // - Title Screen

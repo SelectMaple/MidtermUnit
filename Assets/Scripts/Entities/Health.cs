@@ -45,6 +45,7 @@ namespace Midterm
             if (gameObject.CompareTag("Player"))
             {
                 Debug.Log("Player has died!");
+                GameManager.instance.OnGameOver();
             }
 
             if (gameObject.CompareTag("Enemy"))

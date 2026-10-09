@@ -19,8 +19,12 @@ namespace Midterm
         [SerializeField] TMP_Text levelEnd;
 
         [Header("Menu")]
-        [SerializeField] GameObject menu;
+        [SerializeField] GameObject restart;
+        [SerializeField] GameObject tryAgain;
 
+        [Header("Game End")]
+        [SerializeField] GameObject gameEnd;
+  
 
         [Header("Player Health")]
         // - reference to health script
@@ -43,8 +47,9 @@ namespace Midterm
         public void ShowGameOver()
         {
             gameOverPanel.SetActive(true);
-            menu.SetActive(true);
+            restart.SetActive(true);
             healthObject.SetActive(false);
+
         }
 
         public void ShowLevel(string levelName)
@@ -55,6 +60,14 @@ namespace Midterm
             StopAllCoroutines();
             StartCoroutine(HideLevelUI());
         }
+
+        public void ShowGameEnd()
+        {
+            gameEnd.SetActive(true);
+            tryAgain.SetActive(true);
+            healthObject.SetActive(false);
+        }
+
 
         public void EndLevel()
         {

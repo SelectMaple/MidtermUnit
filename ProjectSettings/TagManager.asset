@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - LevelTransition
   - Bullet
+  - Plate
   layers:
   - Default
   - TransparentFX

@@ -6,14 +6,19 @@ namespace Midterm
     {
         string ownershipTag = "";
         float damage = 10f;
+        bool wasHit = false;
 
         public void Initialize(string _ownershipTag)
         {
             ownershipTag = _ownershipTag;
+            wasHit = false;
         }
 
         private void OnCollisionEnter(Collision collision)
         {
+            if (wasHit)
+                return;
+            
             TargetTrigger target = collision.gameObject.GetComponent<TargetTrigger>();
 
             if(target != null)
@@ -28,6 +33,7 @@ namespace Midterm
                 {
                     if (health != null)
                     {
+                        wasHit = true;
                         health.TakeDamage(damage);
                     }
                 }

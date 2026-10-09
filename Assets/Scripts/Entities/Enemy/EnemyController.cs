@@ -35,6 +35,8 @@ namespace Midterm
 
         void Update()
         {
+            if (GameManager.instance.currentGameState != GameManager.GameState.GamePlaying)
+                return;
             if (currentState != null)
                 currentState.OnStateUpdate();
             
@@ -65,6 +67,7 @@ namespace Midterm
             canAttack = false;
 
             yield return new WaitForSeconds(2f);
+
 
             canAttack = true;
         }
